@@ -7,7 +7,11 @@ import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../Utils/firebase';
 import axios from 'axios';
 import { serverurl } from '../App';
+import { useDispatch } from 'react-redux';
+import { setuserData } from '../redux/userSlice';
 function Auth() {
+   const dispatch=useDispatch()
+
   const handlegoogle=async ()=>{
     try {
       const response= await signInWithPopup(auth,provider)
@@ -15,9 +19,11 @@ function Auth() {
       let name=user.displayName
       let email=user.email
       const result=await axios.post(serverurl+"/api/auth/google",{name,email},{withCredentials:true})
-      console.log(result.data);
+      // console.log(result.data);
+      dispatch(setuserData(result.data))
     } catch (error) {
        console.log(error);
+       dispatch(setuserData(null))
     }
   }
   return (
