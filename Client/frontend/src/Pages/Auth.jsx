@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaBrain } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import { motion } from "motion/react"
@@ -9,9 +9,8 @@ import axios from 'axios';
 import { serverurl } from '../App';
 import { useDispatch } from 'react-redux';
 import { setuserData } from '../redux/userSlice';
-function Auth() {
+function Auth({isModel = false}) {
    const dispatch=useDispatch()
-
   const handlegoogle=async ()=>{
     try {
       const response= await signInWithPopup(auth,provider)
@@ -28,13 +27,13 @@ function Auth() {
   }
   return (
     <>
-    <div className='w-full min-h-screen bg-[#f7f7f7] flex items-center justify-center px-6 py-20'>
+    <div className={`w-full ${ isModel ?"py-4":" min-h-screen bg-[#f7f7f7] flex items-center justify-center px-6 py-20"}`}>
      <motion.div 
      initial={{opacity:0 ,y:-40}}
      animate={{opacity:1,y:0}}
      transition={{duration:2}}
      viewport={false}
-     className='w-full max-w-md p-8 bg-white rounded-3xl shadow-2xl border border-gray-200'>
+     className={`w-full ${isModel ? "max-w-md p-8 rounded-3xl bg-white shadow-2xl border border-gray-200 ": "max-w-lg p-8 bg-white rounded-3xl shadow-2xl border border-gray-200"}`}>
       <div className='flex items-center justify-center gap-3 mb-6'>
         <div className='bg-black text-white p-2 rounded-lg'>
         <FaBrain size={16} />
@@ -58,6 +57,7 @@ function Auth() {
       > <FcGoogle size={20} /> Continue with Google
       </motion.button>
      </motion.div>
+
     </div>
     </>
   )
