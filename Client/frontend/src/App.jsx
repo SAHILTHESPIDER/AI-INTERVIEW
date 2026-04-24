@@ -5,7 +5,8 @@ import Auth from './Pages/Auth'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { setuserData } from './redux/userSlice'
-
+import Interviewpage from './Pages/Interviewpage'
+// import IPLManager from './Pages/Ipl'
 
 export const serverurl="http://localhost:8000"
 
@@ -30,6 +31,7 @@ const App = () => {
   <Routes>
     <Route path='/' element={<Home/>} />
     <Route path='/auth' element={<Auth/>} />
+    <Route path='/interview' element={<Interviewpage />} />
   </Routes>
   </>
   )

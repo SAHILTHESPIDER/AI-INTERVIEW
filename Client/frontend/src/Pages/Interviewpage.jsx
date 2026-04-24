@@ -11,16 +11,19 @@ function Interviewpage() {
     <div className='min-h-screen bg-gray-50'>
       {/* For starting the interview data */}
        {step===1 && (
-    <Step1set  onStart={(data)=>{setInterviewData(data)}} />
+    <Step1set  onStart={(data)=>{setInterviewData(data)
+          ;setStep(2)}} />
        )}
         
        {/* For interview */}
         {step===2 && (
-        <Step2set />
+        <Step2set Interviewdata={interviewdata}
+        onFinish={(Report)=>{setInterviewData(Report);setStep(2)}}
+        />
        )}
        {/* for the report */}
         {step===3 && (
-        <Step3set />
+        <Step3set Report={interviewdata}/>
        )}
     </div>
    </>
